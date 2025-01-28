@@ -103,8 +103,12 @@ const Gallery3D = () => {
     { src: "/IMG-20250113-WA0009.jpg" },
     { src: "/models/IMG-20250113-WA0010.jpg" },
     { src: "/models/IMG-20250113-WA0011.jpg" },
+    { src: "/models/IMG-20250113-WA0011.jpg" },
+    { src: "/models/IMG-20250113-WA0011.jpg" },
     { src: "/models/IMG-20250113-WA0012.jpg" },
     { src: "/models/IMG-20250113-WA0013.jpg" },
+    { src: "/models/IMG-20250113-WA0014.jpg" },
+    { src: "/models/IMG-20250113-WA0014.jpg" },
     { src: "/models/IMG-20250113-WA0014.jpg" },
     { src: "/models/IMG-20250113-WA0016.jpg" },
    

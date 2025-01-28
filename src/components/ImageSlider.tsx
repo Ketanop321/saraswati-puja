@@ -11,62 +11,26 @@ interface SliderItem {
 
 const items: SliderItem[] = [
   {
-    image: '/IMG-20250113-WA0009.jpg',
+    image: 'https://images.unsplash.com/photo-1624456735729-03594a40c5fb',
+    author: 'SARASWATI',
+    title: 'DIVINE WISDOM',
+    topic: 'KNOWLEDGE',
+    description: 'Goddess Saraswati, the embodiment of knowledge, music, art, wisdom, and learning. She represents the free flow of wisdom and consciousness.'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1623244307563-f9ade3df8383',
     author: 'CULTURE',
     title: 'SACRED RITUALS',
     topic: 'TRADITION',
-    description: 'The ancient traditions and rituals that connect us to our cultural heritage, passed down through generations.',
+    description: 'The ancient traditions and rituals that connect us to our cultural heritage, passed down through generations.'
   },
   {
-    image: '/IMG-20250113-WA0010.jpg',
+    image: 'https://images.unsplash.com/photo-1621506821957-1b50ab7787a4',
     author: 'CELEBRATION',
     title: 'FESTIVE SPIRIT',
     topic: 'DEVOTION',
-    description: 'A celebration of learning and creativity, where students and artists seek blessings for their education.',
-  },
-  {
-    image: '/IMG-20250113-WA0011.jpg',
-    author: 'CULTURE',
-    title: 'SACRED RITUALS',
-    topic: 'TRADITION',
-    description: 'The ancient traditions and rituals that connect us to our cultural heritage, passed down through generations.',
-  },
-  {
-    image: '/IMG-20250113-WA0012.jpg',
-    author: 'CELEBRATION',
-    title: 'FESTIVE SPIRIT',
-    topic: 'DEVOTION',
-    description: 'A celebration of learning and creativity, where students and artists seek blessings for their education.',
-  },
-  {
-    image: '/IMG-20250113-WA0014.jpg',
-    author: 'CULTURE',
-    title: 'SACRED RITUALS',
-    topic: 'TRADITION',
-    description: 'The ancient traditions and rituals that connect us to our cultural heritage, passed down through generations.',
-  },
-  {
-    image: '/IMG-20250113-WA0013.jpg',
-    author: 'CELEBRATION',
-    title: 'FESTIVE SPIRIT',
-    topic: 'DEVOTION',
-    description: 'A celebration of learning and creativity, where students and artists seek blessings for their education.',
-  },
-  {
-    image: '/IMG-20250113-WA0016.jpg',
-    author: 'CULTURE',
-    title: 'SACRED RITUALS',
-    topic: 'TRADITION',
-    description: 'The ancient traditions and rituals that connect us to our cultural heritage, passed down through generations.',
-  },
-  {
-    image: '/IMG-20250113-WA0015.jpg',
-    author: 'CELEBRATION',
-    title: 'FESTIVE SPIRIT',
-    topic: 'DEVOTION',
-    description: 'A celebration of learning and creativity, where students and artists seek blessings for their education.',
-  },
-   
+    description: 'A celebration of learning and creativity, where students and artists seek blessings for their educational and artistic pursuits.'
+  }
 ];
 
 export const ImageSlider = () => {

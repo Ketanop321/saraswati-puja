@@ -1,6 +1,5 @@
 import React from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -14,15 +13,15 @@ export const Navbar = () => {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {['Home', 'About', 'Gallery', 'Events', 'Contact'].map((item) => (
-                <Link
+              {['About', 'Gallery', 'Events', 'Contact'].map((item) => (
+                <a
                   key={item}
-                  to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} // Use Link and update to match routes
+                  href={`#${item.toLowerCase()}`}
                   className="text-yellow-900 hover:bg-yellow-100 px-3 py-2 rounded-md text-sm font-medium
                            transition-colors duration-200"
                 >
                   {item}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -41,14 +40,14 @@ export const Navbar = () => {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {['Home', 'About', 'Gallery', 'Events', 'Contact'].map((item) => (
-              <Link
+            {['About', 'Gallery', 'Events', 'Contact'].map((item) => (
+              <a
                 key={item}
-                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                href={`#${item.toLowerCase()}`}
                 className="text-yellow-900 hover:bg-yellow-100 block px-3 py-2 rounded-md text-base font-medium"
               >
                 {item}
-              </Link>
+              </a>
             ))}
           </div>
         </div>
