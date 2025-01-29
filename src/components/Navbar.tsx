@@ -4,23 +4,30 @@ import { Menu, X } from 'lucide-react';
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
+  const navigation = [
+    { name: 'Home', href: '/' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Events', href: '/events' },
+    { name: 'Contact', href: '/contact' }
+  ];
+
   return (
     <nav className="bg-yellow-50/90 backdrop-blur-sm fixed w-full z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <span className="text-2xl font-sanskrit text-yellow-800">सरस्वती पूजा</span>
+            <a href="/" className="text-2xl font-sanskrit text-yellow-800">सरस्वती पूजा</a>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {['About', 'Gallery', 'Events', 'Contact'].map((item) => (
+              {navigation.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={item.name}
+                  href={item.href}
                   className="text-yellow-900 hover:bg-yellow-100 px-3 py-2 rounded-md text-sm font-medium
                            transition-colors duration-200"
                 >
-                  {item}
+                  {item.name}
                 </a>
               ))}
             </div>
@@ -40,13 +47,13 @@ export const Navbar = () => {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {['About', 'Gallery', 'Events', 'Contact'].map((item) => (
+            {navigation.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.name}
+                href={item.href}
                 className="text-yellow-900 hover:bg-yellow-100 block px-3 py-2 rounded-md text-base font-medium"
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </div>

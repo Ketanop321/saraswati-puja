@@ -24,7 +24,7 @@ const ModelViewer = ({ modelPath }: { modelPath: string }) => {
     const maxDimension = Math.max(modelSize.x, modelSize.y, modelSize.z);
 
     // Calculate the desired scale to fit the model within the viewport
-    const desiredScale = 7.0 / maxDimension;
+    const desiredScale = 6.0 / maxDimension;
 
     if (scene.userData.initialized !== true) {
       // Scale the model uniformly based on the desired scale
