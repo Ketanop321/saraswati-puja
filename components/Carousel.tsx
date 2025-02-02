@@ -1,7 +1,6 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -16,87 +15,107 @@ const images = [
   { src: "/images/IMG-20250113-WA0016.jpg", alt: "Prasad Distribution" },
 ];
 
-const Carousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
+const Carousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-    }, 5000)
+      if (!isAnimating) {
+        handleNext();
+      }
+    }, 5000);
 
-    return () => clearInterval(timer)
-  }, [])
+    return () => clearInterval(timer);
+  }, [isAnimating]);
 
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    )
-  }
+  const handlePrevious = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    setTimeout(() => setIsAnimating(false), 500);
+  };
 
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => 
-      (prevIndex + 1) % images.length
-    )
-  }
+  const handleNext = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const handleDotClick = (index: number) => {
+    if (isAnimating || index === currentIndex) return;
+    setIsAnimating(true);
+    setCurrentIndex(index);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
 
   return (
-    <div className="p-8 bg-gradient-to-r from-orange-100 to-yellow-100 rounded-lg">
-      <div className="relative w-full h-[400px] overflow-hidden rounded-lg border-8 border-double border-amber-800 shadow-2xl bg-amber-50">
-        {/* Decorative corners */}
-        <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-amber-900 m-2"></div>
-        <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-amber-900 m-2"></div>
-        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-amber-900 m-2"></div>
-        <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-amber-900 m-2"></div>
-
-        {/* Navigation buttons */}
-        <button 
-          onClick={goToPrevious}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 p-2 rounded-full hover:bg-white transition-colors z-10"
+    <div className="relative w-full max-w-6xl mx-auto px-4 py-8">
+      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gray-100 shadow-xl">
+        {/* Navigation arrows */}
+        <button
+          onClick={handlePrevious}
+          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-black/30 p-3 text-white backdrop-blur-sm transition-all hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Previous slide"
         >
-          <ChevronLeft className="w-6 h-6 text-amber-900" />
+          <ChevronLeft className="h-6 w-6" />
         </button>
-        <button 
-          onClick={goToNext}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 p-2 rounded-full hover:bg-white transition-colors z-10"
+        <button
+          onClick={handleNext}
+          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-black/30 p-3 text-white backdrop-blur-sm transition-all hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Next slide"
         >
-          <ChevronRight className="w-6 h-6 text-amber-900" />
+          <ChevronRight className="h-6 w-6" />
         </button>
 
-        {/* Slides */}
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out ${
-              index === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={image.src || "/placeholder.svg"}
-              alt={image.alt}
-              layout="fill"
-              objectFit="cover"
-              className="p-2"
-            />
-          </div>
-        ))}
+        {/* Image slides */}
+        <div className="relative h-full w-full">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                index === currentIndex
+                  ? "opacity-100 transform-none"
+                  : "opacity-0 translate-x-full"
+              }`}
+            >
+              <div className="relative h-full w-full">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover"
+                  priority={index === currentIndex}
+                  sizes="(max-width: 1536px) 100vw, 1536px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <p className="text-white text-xl font-medium">{image.alt}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-        {/* Indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+        {/* Dot indicators */}
+        <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 transform gap-2">
           {images.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              onClick={() => handleDotClick(index)}
+              className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white ${
                 index === currentIndex
-                  ? "bg-amber-900 w-6"
-                  : "bg-amber-900/40 hover:bg-amber-900/60"
+                  ? "w-8 bg-white"
+                  : "w-2 bg-white/50 hover:bg-white/75"
               }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Carousel
+export default Carousel;

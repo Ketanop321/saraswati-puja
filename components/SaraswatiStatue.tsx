@@ -126,20 +126,21 @@ export default function SaraswatiStatue() {
         </div>
         {/* Optional: Performance-friendly background decoration */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(10)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-float opacity-50"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
-            >
-              🌸
-            </div>
-          ))}
-        </div>
+  {[...Array(40)].map((_, i) => (
+    <div
+      key={i}
+      className="absolute animate-float opacity-50"
+      style={{
+        left: `${Math.random() * 120}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 10}s`,
+      }}
+    >
+      🌸   
+    </div>
+  ))}
+</div>
+
       </div>
     </section>
   )
