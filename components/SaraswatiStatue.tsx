@@ -5,8 +5,8 @@ import { OrbitControls, Environment, useGLTF, Preload } from "@react-three/drei"
 import * as THREE from "three"
 import { Html } from "@react-three/drei"
 
-// Pre-load the model path
-const MODEL_PATH = "/models/saraswati.glb"
+// Pre-load the model path with a relative path that works in both dev and production
+const MODEL_PATH = "./models/saraswati.glb"
 useGLTF.preload(MODEL_PATH)
 
 // Performance-optimized model loader
