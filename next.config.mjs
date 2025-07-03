@@ -16,6 +16,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Ensure static files are properly served
+  env: {
+    NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  },
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
