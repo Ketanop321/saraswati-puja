@@ -1,20 +1,46 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useCallback } from "react"
 import styles from "./Gallery3D.module.css"
-import { init } from "../lib/gallery3d"
+import { init, cleanup } from "../lib/gallery3d"
 
 const Gallery3D: React.FC = () => {
   const screenRef = useRef<HTMLDivElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const urlInfoRef = useRef<HTMLDivElement>(null)
+  const animationFrameId = useRef<number>()
+
+  const handleResize = useCallback(() => {
+    // Debounce resize handler
+    if (animationFrameId.current) {
+      cancelAnimationFrame(animationFrameId.current)
+    }
+    
+    animationFrameId.current = requestAnimationFrame(() => {
+      if (screenRef.current && barRef.current && urlInfoRef.current) {
+        init(screenRef.current, barRef.current, urlInfoRef.current)
+      }
+    })
+  }, [])
 
   useEffect(() => {
     if (screenRef.current && barRef.current && urlInfoRef.current) {
       init(screenRef.current, barRef.current, urlInfoRef.current)
     }
-  }, [])
+
+    // Add resize event listener
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    // Cleanup function
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current)
+      }
+      cleanup()
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [handleResize])
 
   return (
     <div className={styles.body}>
