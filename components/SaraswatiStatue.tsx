@@ -5,10 +5,15 @@ import { OrbitControls, Environment, useGLTF, Preload } from "@react-three/drei"
 import * as THREE from "three"
 import { Html } from "@react-three/drei"
 
-// Use environment variable for base path to ensure compatibility in all environments
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
-const MODEL_PATH = `${basePath}/models/saraswati.glb`
-useGLTF.preload(MODEL_PATH)
+// Use absolute path for the model to ensure it works in all environments
+const MODEL_PATH = '/models/saraswati.glb';
+
+// Preload the model
+if (typeof window !== 'undefined') {
+  // Only preload in the browser environment
+  const { useGLTF } = require('@react-three/drei');
+  useGLTF.preload(MODEL_PATH);
+}
 
 // Performance-optimized model loader
 const ModelViewer = ({ modelPath }: { modelPath: string }) => {
@@ -39,11 +44,12 @@ const ModelViewer = ({ modelPath }: { modelPath: string }) => {
     )
 
     // Optimize meshes
-    clonedScene.traverse((child) => {
-      if (child.isMesh) {
-        child.frustumCulled = true
-        child.matrixAutoUpdate = false
-        child.updateMatrix()
+    clonedScene.traverse((object) => {
+      if ('isMesh' in object) {
+        const mesh = object as THREE.Mesh;
+        mesh.frustumCulled = true;
+        mesh.matrixAutoUpdate = false;
+        mesh.updateMatrix();
       }
     })
 
