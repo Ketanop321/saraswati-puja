@@ -6,17 +6,17 @@ export default function EventsPage() {
   const events = [
     {
       title: "Saraswati Puja Celebration",
-      date: "February 03, 2025",
+      date: "23 Jan 2026",
       description: "Join us for the annual Saraswati Puja celebration.",
     },
     {
       title: "Cultural Program",
-      date: "February 02, 2025",
+      date: "22 Jan 2026",
       description: "Enjoy performances by local artists and students.",
     },
     {
       title: "Knowledge Sharing Session",
-      date: "February 02, 2025",
+      date: "21 Jan 2026",
       description: "Learn about the significance of Saraswati Puja and its traditions.",
     },
   ]
@@ -41,4 +41,3 @@ export default function EventsPage() {
     </main>
   )
 }
-
