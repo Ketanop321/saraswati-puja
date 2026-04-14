@@ -1,8 +1,9 @@
-  import Navbar from "../components/Navbar"
+'use client'
+
+import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import LoadingAnimation from "../components/LoadingAnimation"
 import dynamic from 'next/dynamic'
-import SaraswatiStatue from "../components/SaraswatiStatue"
 import BlessingsOfKnowledge from "../components/BlessingsOfKnowledge"
 
 // Dynamically import the 3D component to prevent initial load blocking
